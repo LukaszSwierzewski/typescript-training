@@ -5,17 +5,18 @@ class Department {
         this.id = id;
         this.employees = [];
     }
-    describe() {
-        console.log(`department ${this.id} :  ${this.name}`);
-    }
     addEmployee(employee) {
         this.employees.push(employee);
+    }
+    static createEmployee(name) {
+        return { name };
     }
     consoleEmployees() {
         console.log(this.employees.length);
         console.log(this.employees);
     }
 }
+Department.year = 2000;
 class ITDepartment extends Department {
     constructor(id, admins) {
         super(id, "IT");
@@ -37,6 +38,16 @@ class ITDepartment extends Department {
         }
         this.addEmployee(value);
     }
+    static getInstance() {
+        if (ITDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new ITDepartment('d2', ['ola']);
+        return this.instance;
+    }
+    describe() {
+        console.log(`described IT: ${this.id}`);
+    }
     addEmployee(name) {
         if (name === 'max') {
             return;
@@ -46,9 +57,13 @@ class ITDepartment extends Department {
         }
     }
 }
-const it = new ITDepartment('Accounting', ['max']);
+console.log(Department.year);
+const empoloyee1 = Department.createEmployee('lukasz');
+console.log(empoloyee1);
+const it = ITDepartment.getInstance();
 console.log(it.mostRecentEmployee);
 it.addEmployee('max');
+it.describe();
 it.addEmployee('manu');
 it.addEmployee('tom');
 it.consoleEmployees();
