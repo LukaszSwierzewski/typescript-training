@@ -17,19 +17,6 @@ const e1: ElevatedEmployee = {
 }
 
 // intersection -> czyli czesc wspolna 
-type Combinable = string | number
-type Numeric = number | boolean
-
-type Universal = Combinable & Numeric
-
-let num: Universal = 1
-
-function add(a: Combinable, b: Combinable) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString()
-    }
-    return a + b;
-}
 
 type UnkownEmployee = Employee | Admin;
 
@@ -111,7 +98,57 @@ userInput.value = "hi there"
 
 userInputSecond.value = 'second value'
 
-
+//index type
 interface ErrorContainer {
+    id: string;
     [key: string]: string;
 }
+
+const errorBag: ErrorContainer = {
+    email: 'not valid',
+    id: '1',
+    'asd_asd': 'asdasd'
+}
+type Combinable = string | number
+type Numeric = number | boolean
+
+type Universal = Combinable & Numeric
+
+let num: Universal = 1
+
+// function overloads
+function add(a: number, b: number): number;
+function add(a: string, b: number): string;
+function add(a: string, b: string): string;
+
+function add(a: Combinable, b: Combinable) {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString()
+    }
+    return a + b;
+}
+
+
+const result = add(1, 50);
+console.log(result)
+const stringResult = add('lukasz ', 1)
+console.log(stringResult.split(' '))
+
+
+// optional chaining
+
+const fetched = {
+    id: 'u1',
+    name: 'lukasz',
+    job: {
+        title: 'ceo',
+        description: 'my company'
+    }
+}
+console.log(fetched?.job?.title)
+
+let userInputThird = undefined;
+
+const storedData = userInputThird ?? "DEFAULT"
+
+console.log(storedData)
