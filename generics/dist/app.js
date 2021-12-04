@@ -68,35 +68,27 @@ class DataStorage {
         this.data.push(item);
     }
     removeItem(item) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
         this.data.splice(this.data.indexOf(item), 1);
     }
     getItem() {
         return [...this.data];
     }
 }
-console.log('asd');
 const textStorage = new DataStorage();
 textStorage.addItem('maks');
 textStorage.addItem('tom');
 textStorage.removeItem('maks');
 console.log(textStorage.getItem());
 const numberStorage = new DataStorage();
-const objStorage = new DataStorage();
-objStorage.addItem({ name: 'maks' });
-objStorage.addItem({ name: 'tom' });
-objStorage.removeItem({ name: 'tom' });
-console.log(objStorage);
-const orginal = {
-    name: 'lukasz',
-    hobbies: ['a', 'b', 'c'],
-    others: {
-        names: 'Fiesta'
-    }
-};
-const copied = JSON.parse(JSON.stringify(orginal));
-copied.name = 'tomek';
-console.log(copied);
-orginal.others.names = 'skoda';
-orginal.hobbies.push('d');
-console.log(orginal);
-console.log(copied);
+// Jezeli chcemy zeby cos bylo opcjonalne i nie wiemy co
+function createCourseGoal(title, description, date) {
+    let courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    return courseGoal;
+}
+const nameArray = ['max', 'sports'];
+// nameArray.push('anna')
